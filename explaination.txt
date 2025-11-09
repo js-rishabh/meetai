@@ -1,0 +1,39 @@
+resources used : 
+[1. Neon for postgresql database
+2. drizzle for database
+3. shadcnui
+4. rabbitai for code review, documentation, debugging and suggestions]
+
+
+
+03: authentication setup
+-integrate better-auth
+-configure auth schema
+	-push changes
+
+-create basicUI
+	-create new user
+
+-create review and merge pull request
+
+
+resources used: 
+[ 
+1. better auth for authentication
+]
+
+04: Auth Ui
+
+-create auth pages
+-create auth layout
+-create auth module
+
+-- create auth views
+   - regiter form
+   - login form
+   - get app logo
+
+resources used:
+[
+1. logoipsum for logos this website contains bunch  of logos for your website
+]
