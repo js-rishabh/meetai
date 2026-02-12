@@ -1,23 +1,24 @@
 "use client"
-import {z} from "zod";
+import { z } from "zod";
 import { OctagonAlertIcon, Router } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import {zodResolver} from "@hookform/resolvers/zod";
+import { FaGithub, FaGoogle } from "react-icons/fa";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 
 import { Input } from "@/components/ui/input"
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button"
-import {Alert, AlertTitle} from "@/components/ui/alert"
-import {Card, CardContent} from "@/components/ui/card"
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Alert, AlertTitle } from "@/components/ui/alert"
+import { Card, CardContent } from "@/components/ui/card"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
 
 const formSchema = z.object({
     email: z.string().email(),
-    password: z.string().min(1, { message: "Password is required"}),
+    password: z.string().min(1, { message: "Password is required" }),
 });
 
 
@@ -44,13 +45,14 @@ export const SignInView = () => {
             {
                 email: data.email,
                 password: data.password,
+                callbackURL: "/",
             },
             {
                 onSuccess: () => {
                     setpending(false);
                     router.push("/");
                 },
-                onError: ({error}) => {
+                onError: ({ error }) => {
                     setpending(false);
                     setError(error.message)
                 }
@@ -58,7 +60,29 @@ export const SignInView = () => {
         );
     }
 
-    return(
+    const onSocial = (provider: "github" | "google") => {
+        setError(null);
+        setpending(true);
+
+        authClient.signIn.social(
+            {
+                provider: provider,
+                callbackURL: "/",
+
+            },
+            {
+                onSuccess: () => {
+                    setpending(false);
+                },
+                onError: ({ error }) => {
+                    setpending(false);
+                    setError(error.message)
+                }
+            }
+        );
+    }
+
+    return (
         <div className="flex flex-col gap6">
             <Card className="overflow-hidden p-0">
                 <CardContent className="grid p-0 md:grid-cols-2">
@@ -74,8 +98,8 @@ export const SignInView = () => {
                                 <div className="grid gap-3">
                                     <FormField
                                         control={form.control}
-                                        name= "email"
-                                        render={({field}) => (
+                                        name="email"
+                                        render={({ field }) => (
                                             <FormItem>
                                                 <FormLabel>Email</FormLabel>
                                                 <FormControl>
@@ -95,8 +119,8 @@ export const SignInView = () => {
                                 <div className="grid gap-3">
                                     <FormField
                                         control={form.control}
-                                        name= "password"
-                                        render={({field}) => (
+                                        name="password"
+                                        render={({ field }) => (
                                             <FormItem>
                                                 <FormLabel>Password</FormLabel>
                                                 <FormControl>
@@ -114,7 +138,7 @@ export const SignInView = () => {
                                 </div>
                                 {!!error && (
                                     <Alert className="bg-destructive/10 border-none">
-                                        <OctagonAlertIcon className="h-4 w-4 !text-destructive"/>
+                                        <OctagonAlertIcon className="h-4 w-4 !text-destructive" />
                                         <AlertTitle>{error}</AlertTitle>
                                     </Alert>
                                 )}
@@ -125,11 +149,16 @@ export const SignInView = () => {
                                     </span>
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
-                                    <Button disabled={pending} variant={"outline"} type="button" className="w-full">
-                                        Google
+                                    <Button disabled={pending}
+                                        onClick={() => onSocial("google")}
+                                        variant={"outline"}
+                                        type="button" className="w-full">
+                                        <FaGoogle />
                                     </Button>
-                                    <Button disabled={pending} variant={"outline"} type="button" className="w-full">
-                                        Github
+                                    <Button disabled={pending}
+                                        onClick={() => onSocial("github")}
+                                        variant={"outline"} type="button" className="w-full">
+                                        <FaGithub />
                                     </Button>
                                 </div>
                                 <div className="text-center text-sm">
@@ -143,7 +172,7 @@ export const SignInView = () => {
                     </Form>
 
                     <div className="bg-radial from-green-700 to-green-900 relative hidden md:flex flex-col gap-y-4 items-center justify-center">
-                        <img src="/logo.svg" alt="Image" className="h-[92px] w-[92px]"/>
+                        <img src="/logo.svg" alt="Image" className="h-[92px] w-[92px]" />
                         <p className="text-2xl font-semibold text-white">
                             Meet.AI
                         </p>
@@ -155,10 +184,10 @@ export const SignInView = () => {
                 By clicking continue, you agree to our <a href="#">Terms of Service</a> and <a>Privacy Policy</a>
             </div>
 
-        </div> 
-       
-                    
-        
+        </div>
+
+
+
     );
 };
 

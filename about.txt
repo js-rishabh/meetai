@@ -1,0 +1,7 @@
+starting this documentation at 2:10:00
+
+function that i used right now is callbackURL you can read the documentation of better auth for more information
+
+next at 2:11:00 i interchanged router and callbackURL and removed userouter
+
+at 2:12:00 i was going to start "hoe to protect non auth pages"
