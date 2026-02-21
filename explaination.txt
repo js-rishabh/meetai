@@ -38,4 +38,23 @@ resources used:
 1. logoipsum for logos this website contains bunch  of logos for your website
 ]
 
-05: 
+05: authentiion socials
+
+
+
+
+
+06: Dashboard sidebar
+
+-create dashboard layout
+-create dashboard module
+- create sidebar
+- modify global.css theme
+- fix gradient colors in auth views
+- create review and merge pull request
+
+
+resources used:
+[
+1. dicebar/core and dicebar/collection for avatar
+]
