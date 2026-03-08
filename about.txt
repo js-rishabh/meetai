@@ -5,3 +5,5 @@ function that i used right now is callbackURL you can read the documentation of 
 next at 2:11:00 i interchanged router and callbackURL and removed userouter
 
 at 2:12:00 i was going to start "hoe to protect non auth pages"
+
+npm install @trpc/server@11.1.2 @trpc/client@11.1.2 @trpc/tanstack-react-query@11.1.2 @tanstack/react-query@5.76.1 zod@3.25.7 client-only server-only --legacy-peer-deps

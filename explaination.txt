@@ -58,3 +58,15 @@ resources used:
 [
 1. dicebar/core and dicebar/collection for avatar
 ]
+
+08: trpc setup 
+
+-setup trpc
+-experiment with client components
+-experiment with server components
+-create review and merge pull request
+
+resources used:
+[
+1. trpc for type safe api
+]
