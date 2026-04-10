@@ -1,7 +1,6 @@
 "use client";
 
 import { useTRPC } from "@/trpc/client";
-import { useQuery } from "@tanstack/react-query";
 import { LoadingState } from "@/components/loading-state";
 import { ErrorState } from "@/components/error-state";
 import { useSuspenseQuery } from "@tanstack/react-query";
@@ -11,7 +10,7 @@ export const MeetingsView = () => {
     const { data } = useSuspenseQuery(trpc.meetings.getMany.queryOptions({}));
 
     return (
-        <div>
+        <div >
             {JSON.stringify(data)}
         </div>
     );
